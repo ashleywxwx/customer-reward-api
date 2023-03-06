@@ -29,6 +29,7 @@ public class TransactionController {
         this.calculator = calculator;
     }
 
+    // This endpoint overrides the default provide by Spring Data REST
     @RequestMapping(method = RequestMethod.POST, value = "/transactions")
     public @ResponseBody ResponseEntity<?> createTransaction(@RequestBody CustomerTransaction request) {
 
