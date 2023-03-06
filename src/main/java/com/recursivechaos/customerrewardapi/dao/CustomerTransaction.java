@@ -1,5 +1,6 @@
 package com.recursivechaos.customerrewardapi.dao;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 public class CustomerTransaction {
@@ -21,18 +23,27 @@ public class CustomerTransaction {
 
     private BigDecimal amount;
 
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime timestamp;
+
+    private int rewardPoints;
+
     public CustomerTransaction() {
     }
 
-    public CustomerTransaction(@NonNull String userId, BigDecimal amount) {
+    public CustomerTransaction(@NonNull String userId, BigDecimal amount, LocalDateTime timestamp, int rewardPoints) {
         this.userId = userId;
         this.amount = amount;
+        this.timestamp = timestamp;
+        this.rewardPoints = rewardPoints;
     }
 
-    public CustomerTransaction(String id, @NonNull String userId, BigDecimal amount) {
+    public CustomerTransaction(String id, @NonNull String userId, BigDecimal amount, LocalDateTime timestamp, int rewardPoints) {
         this.id = id;
         this.userId = userId;
         this.amount = amount;
+        this.timestamp = timestamp;
+        this.rewardPoints = rewardPoints;
     }
 
     public String getId() {
@@ -54,5 +65,21 @@ public class CustomerTransaction {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getRewardPoints() {
+        return rewardPoints;
+    }
+
+    public void setRewardPoints(int rewardPoints) {
+        this.rewardPoints = rewardPoints;
     }
 }
